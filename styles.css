@@ -1,8 +1,17 @@
 /* Molecule Viewer Plugin — dark theme */
 
 /* ── Command palette modal ── */
+.mol-modal-container {
+  width: 50vw;
+  max-width: 600px;
+  min-width: 320px;
+}
+
 .mol-modal {
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mol-modal-input {
@@ -17,54 +26,21 @@
   box-sizing: border-box;
   outline: none;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .mol-modal-input:focus {
   border-color: #555;
 }
 
-.mol-modal-preview {
-  min-height: 200px;
-}
-
+/* ── Molecule container ── */
 .mol-container {
   background: #000000;
   border-radius: 8px;
   padding: 12px 16px 16px;
   margin: 8px 0;
   user-select: none;
-}
-
-/* ── Controls ── */
-.mol-controls {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  justify-content: flex-start;
-}
-
-.mol-btn {
-  background: transparent;
-  border: 1px solid #333;
-  color: #666;
-  border-radius: 4px;
-  padding: 3px 10px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
-  font-family: var(--font-interface);
-  letter-spacing: 0.03em;
-}
-
-.mol-btn:hover {
-  border-color: #555;
-  color: #999;
-}
-
-.mol-btn--active {
-  border-color: #555;
-  color: #ccc;
-  background: #111;
+  position: relative;
 }
 
 /* ── SVG wrapper — centred ── */
@@ -78,6 +54,35 @@
 .mol-svg-wrapper svg {
   max-width: 100%;
   height: auto;
+}
+
+/* ── Copy button — bottom right ── */
+.mol-copy-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.mol-copy-btn:hover {
+  color: #aaa;
+  border-color: #555;
+}
+
+.mol-copy-btn--done {
+  color: #4ade80;
+  border-color: #4ade80;
 }
 
 /* ── State messages ── */

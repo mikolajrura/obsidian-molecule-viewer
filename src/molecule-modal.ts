@@ -1,18 +1,18 @@
-import { App, Modal } from "obsidian";
+import { App, Editor, MarkdownView, Modal } from "obsidian";
 import { RDKitModule } from "./rdkit-loader";
 import { renderMolecule } from "./molecule-renderer";
 
 export class MoleculeModal extends Modal {
-  private rdkit: RDKitModule;
-  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  private rdkitReady: Promise<RDKitModule>;
 
-  constructor(app: App, rdkit: RDKitModule) {
+  constructor(app: App, rdkitReady: Promise<RDKitModule>) {
     super(app);
-    this.rdkit = rdkit;
+    this.rdkitReady = rdkitReady;
   }
 
   onOpen() {
-    const { contentEl } = this;
+    const { contentEl, modalEl } = this;
+    modalEl.addClass("mol-modal-container");
     contentEl.addClass("mol-modal");
 
     const input = contentEl.createEl("input", {
@@ -21,23 +21,27 @@ export class MoleculeModal extends Modal {
       cls: "mol-modal-input",
     });
 
-    const preview = contentEl.createDiv({ cls: "mol-modal-preview" });
+    input.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const smiles = input.value.trim();
+      if (!smiles) return;
 
-    input.addEventListener("input", () => {
-      if (this.debounceTimer) clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(() => {
-        const smiles = input.value.trim();
-        if (smiles) renderMolecule(smiles, preview, this.rdkit);
-        else preview.empty();
-      }, 300);
+      const view = this.app.workspace.getActiveViewOfType(MarkdownView);
+      if (!view) return;
+
+      const editor = view.editor;
+      const cursor = editor.getCursor();
+      const block = `\n\`\`\`smiles\n${smiles}\n\`\`\`\n`;
+      editor.replaceRange(block, cursor);
+      editor.setCursor({ line: cursor.line + 4, ch: 0 });
+
+      this.close();
     });
 
-    // Focus immediately so user can paste right away
     input.focus();
   }
 
   onClose() {
-    if (this.debounceTimer) clearTimeout(this.debounceTimer);
     this.contentEl.empty();
   }
 }

@@ -43,10 +43,6 @@ const context = await esbuild.context({
   sourcemap: prod ? false : "inline",
   treeShaking: true,
   outfile: "main.js",
-  define: {
-    // Make __dirname available inside the bundle (plugin folder at runtime)
-    "__dirname": "__dirname",
-  },
 });
 
 if (prod) {

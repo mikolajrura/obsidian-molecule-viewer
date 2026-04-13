@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="mikolajrura/obsidian-molecule-viewer"
+REPO="mikolajrura/molecule-embeds"
 TAG="latest"
 FILES="main.js manifest.json styles.css RDKit_minimal.js RDKit_minimal.wasm"
 
@@ -13,7 +13,7 @@ if [ -z "$VAULT" ]; then
   exit 1
 fi
 
-PLUGIN_DIR="$VAULT/.obsidian/plugins/obsidian-molecule-viewer"
+PLUGIN_DIR="$VAULT/.obsidian/plugins/molecule-embeds"
 mkdir -p "$PLUGIN_DIR"
 
 # ── Download release assets ──

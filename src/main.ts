@@ -10,8 +10,12 @@ export default class MoleculeViewerPlugin extends Plugin {
   async onload() {
     console.log("Molecule Viewer: loading plugin");
 
+    // Resolve plugin folder via Obsidian's vault adapter
+    const basePath = (this.app.vault.adapter as any).getBasePath() as string;
+    const pluginDir = `${basePath}/.obsidian/plugins/${this.manifest.id}`;
+
     // Start loading RDKit in the background immediately
-    this.rdkitLoading = loadRDKit().then((mod) => {
+    this.rdkitLoading = loadRDKit(pluginDir).then((mod) => {
       this.rdkit = mod;
       console.log(`Molecule Viewer: RDKit loaded (${mod.version()})`);
       return mod;
@@ -20,9 +24,8 @@ export default class MoleculeViewerPlugin extends Plugin {
     this.addCommand({
       id: "open-molecule-viewer",
       name: "Otwórz podgląd molekuły (SMILES)",
-      callback: async () => {
-        if (!this.rdkit) await this.rdkitLoading;
-        new MoleculeModal(this.app, this.rdkit!).open();
+      callback: () => {
+        new MoleculeModal(this.app, this.rdkitLoading!).open();
       },
     });
 

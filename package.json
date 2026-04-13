@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-molecule-viewer",
+  "name": "molecule-embeds",
   "version": "1.0.0",
   "description": "Obsidian plugin: render SMILES/MOL molecules as beautiful 2D graphs",
   "main": "main.js",
