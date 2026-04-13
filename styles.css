@@ -1,5 +1,32 @@
 /* Molecule Viewer Plugin — dark theme */
 
+/* ── Command palette modal ── */
+.mol-modal {
+  padding: 0;
+}
+
+.mol-modal-input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #ddd;
+  font-family: var(--font-monospace);
+  font-size: 14px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.mol-modal-input:focus {
+  border-color: #555;
+}
+
+.mol-modal-preview {
+  min-height: 200px;
+}
+
 .mol-container {
   background: #000000;
   border-radius: 8px;

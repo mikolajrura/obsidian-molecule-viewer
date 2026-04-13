@@ -1,6 +1,7 @@
 import { Plugin, MarkdownPostProcessorContext } from "obsidian";
 import { loadRDKit, RDKitModule } from "./rdkit-loader";
 import { renderMolecule } from "./molecule-renderer";
+import { MoleculeModal } from "./molecule-modal";
 
 export default class MoleculeViewerPlugin extends Plugin {
   private rdkit: RDKitModule | null = null;
@@ -14,6 +15,15 @@ export default class MoleculeViewerPlugin extends Plugin {
       this.rdkit = mod;
       console.log(`Molecule Viewer: RDKit loaded (${mod.version()})`);
       return mod;
+    });
+
+    this.addCommand({
+      id: "open-molecule-viewer",
+      name: "Otwórz podgląd molekuły (SMILES)",
+      callback: async () => {
+        if (!this.rdkit) await this.rdkitLoading;
+        new MoleculeModal(this.app, this.rdkit!).open();
+      },
     });
 
     this.registerMarkdownCodeBlockProcessor(
