@@ -1,0 +1,70 @@
+/* Molecule Viewer Plugin — dark theme */
+
+.mol-container {
+  background: #000000;
+  border-radius: 8px;
+  padding: 12px 16px 16px;
+  margin: 8px 0;
+  user-select: none;
+}
+
+/* ── Controls ── */
+.mol-controls {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  justify-content: flex-start;
+}
+
+.mol-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #666;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: var(--font-interface);
+  letter-spacing: 0.03em;
+}
+
+.mol-btn:hover {
+  border-color: #555;
+  color: #999;
+}
+
+.mol-btn--active {
+  border-color: #555;
+  color: #ccc;
+  background: #111;
+}
+
+/* ── SVG wrapper — centred ── */
+.mol-svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+
+.mol-svg-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── State messages ── */
+.mol-error {
+  color: #e05050;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}
+
+.mol-loading {
+  color: #666;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+  font-style: italic;
+}

@@ -1,0 +1,11 @@
+{
+  "id": "obsidian-molecule-viewer",
+  "name": "Molecule Viewer",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Render SMILES/MOL molecules as beautiful 2D skeletal graphs using RDKit.js.",
+  "author": "mikolajrura",
+  "authorUrl": "https://github.com/mikolajrura",
+  "fundingUrl": "",
+  "isDesktopOnly": false
+}
