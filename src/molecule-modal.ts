@@ -17,7 +17,7 @@ export class MoleculeModal extends Modal {
 
     const input = contentEl.createEl("input", {
       type: "text",
-      placeholder: "Wklej SMILES…",
+      placeholder: "Paste SMILES…",
       cls: "mol-modal-input",
     });
 
